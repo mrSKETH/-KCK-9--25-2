@@ -751,6 +751,11 @@
   </div>
 
   <script>
+  // === Конфигурация GitHub Gist ===
+  const GIST_ID = '41801e8ed86a9c41dac5acc792d03f81';
+  const HOMEWORK_CACHE_KEY = 'homework_cache';
+  const CACHE_DURATION = 5 * 60 * 1000; // 5 минут кэш
+
   // === расписание ===
   const schedule = {
     1: { // понедельник
@@ -803,30 +808,110 @@
     return getWeekNumber(d)%2===0;
   }
 
-  // === LocalStorage для домашки ===
-  function saveHW(key,value){
+  // === Функции для работы с GitHub Gist ===
+  async function loadAllHomework() {
+    // Проверяем кэш
+    const cached = getCachedHomework();
+    if (cached) return cached;
+
+    try {
+      const response = await fetch(`https://api.github.com/gists/${GIST_ID}`);
+      if (!response.ok) throw new Error('Ошибка загрузки');
+      
+      const gist = await response.json();
+      const homework = JSON.parse(gist.files['homework.json'].content);
+      
+      // Сохраняем в кэш
+      cacheHomework(homework);
+      return homework;
+    } catch (error) {
+      console.error('Ошибка загрузки ДЗ:', error);
+      showNotification("Ошибка загрузки домашних заданий", "error");
+      return getCachedHomework() || {};
+    }
+  }
+
+  async function saveHomework(key, value) {
+    if (currentUserRole === 'student') {
+      showNotification("Студенты не могут редактировать домашние задания", "error");
+      return false;
+    }
+
+    try {
+      // Загружаем текущие данные
+      const currentHomework = await loadAllHomework();
+      
+      // Обновляем данные
+      if (value.trim()) {
+        currentHomework[key] = value;
+      } else {
+        delete currentHomework[key];
+      }
+      
+      // Отправляем на GitHub (только чтение - сохраняем локально)
+      // Для реального сохранения нужен GitHub Token, но для демо используем localStorage
+      localStorage.setItem('homework_data', JSON.stringify(currentHomework));
+      
+      // Обновляем кэш
+      cacheHomework(currentHomework);
+      showNotification("Домашнее задание сохранено!", "success");
+      return true;
+    } catch (error) {
+      console.error('Ошибка сохранения ДЗ:', error);
+      showNotification("Ошибка сохранения", "error");
+      return false;
+    }
+  }
+
+  // === Кэширование ===
+  function cacheHomework(homework) {
+    const cache = {
+      data: homework,
+      timestamp: Date.now()
+    };
+    localStorage.setItem(HOMEWORK_CACHE_KEY, JSON.stringify(cache));
+  }
+
+  function getCachedHomework() {
+    const cached = localStorage.getItem(HOMEWORK_CACHE_KEY);
+    if (!cached) return null;
+    
+    const cache = JSON.parse(cached);
+    const isExpired = Date.now() - cache.timestamp > CACHE_DURATION;
+    
+    return isExpired ? null : cache.data;
+  }
+
+  // === Обновленные функции для домашних заданий ===
+  async function saveHW(key, value) {
+    const success = await saveHomework(key, value);
+    if (success) {
+      // Перерисовываем расписание
+      const today = new Date();
+      const day = today.getDay();
+      const weekType = isEvenWeek(today) ? "even" : "odd";
+      const activeDay = document.querySelector('.day-btn.active');
+      
+      if (activeDay) {
+        const activeDayId = parseInt(activeDay.id.split('-')[1]);
+        await renderSchedule(activeDayId, weekType, activeDayId === day);
+      }
+    }
+  }
+
+  async function clearHW(key) {
     if (currentUserRole === 'student') {
       showNotification("Студенты не могут редактировать домашние задания", "error");
       return;
     }
     
-    localStorage.setItem(key,value);
-    showNotification("Домашнее задание сохранено!", "success");
-  }
-  
-  function loadHW(key){
-    return localStorage.getItem(key)||"";
-  }
-  
-  function clearHW(key){
-    if (currentUserRole === 'student') {
-      showNotification("Студенты не могут редактировать домашние задания", "error");
-      return;
-    }
-    
-    localStorage.removeItem(key);
-    document.getElementById(`hw-${key}`).value = "";
+    await saveHomework(key, '');
     showNotification("Домашнее задание удалено!", "error");
+  }
+
+  function loadHW(key) {
+    // Для обратной совместимости
+    return "";
   }
 
   // === Уведомления ===
@@ -852,9 +937,12 @@
   }
 
   // === Отображение расписания ===
-  function renderSchedule(day, weekType, isToday = false) {
+  async function renderSchedule(day, weekType, isToday = false) {
     const title = document.getElementById("weekTypeTitle");
     const list = document.getElementById("todaySchedule");
+    
+    // Загружаем все ДЗ
+    const homeworkData = await loadAllHomework();
     
     // Обновляем активную кнопку дня
     document.querySelectorAll('.day-btn').forEach(btn => {
@@ -893,7 +981,7 @@
       } else {
         list.innerHTML = lessons.map((lesson, i) => {
           const key = `${weekType}-${day}-${i}`;
-          const hw = loadHW(key);
+          const hw = homeworkData[key] || "";
           
           // Для студентов показываем только текст домашнего задания
           if (currentUserRole === 'student') {
@@ -1117,28 +1205,28 @@
       button.className = `day-btn ${i === day ? 'active' : ''}`;
       button.id = `day-${i}`;
       button.textContent = dayNames[i];
-      button.addEventListener('click', () => {
+      button.addEventListener('click', async () => {
         // Определяем текущий тип недели из активной кнопки
         const currentWeekType = document.getElementById('evenWeekBtn').classList.contains('active') ? 'even' : 'odd';
-        renderSchedule(i, currentWeekType, i === day);
+        await renderSchedule(i, currentWeekType, i === day);
       });
       dayNav.appendChild(button);
     }
     
     // Обработчики для кнопок недель
-    document.getElementById('evenWeekBtn').addEventListener('click', () => {
+    document.getElementById('evenWeekBtn').addEventListener('click', async () => {
       const activeDay = document.querySelector('.day-btn.active').id.split('-')[1];
-      renderSchedule(parseInt(activeDay), 'even', parseInt(activeDay) === day);
+      await renderSchedule(parseInt(activeDay), 'even', parseInt(activeDay) === day);
     });
     
-    document.getElementById('oddWeekBtn').addEventListener('click', () => {
+    document.getElementById('oddWeekBtn').addEventListener('click', async () => {
       const activeDay = document.querySelector('.day-btn.active').id.split('-')[1];
-      renderSchedule(parseInt(activeDay), 'odd', parseInt(activeDay) === day);
+      await renderSchedule(parseInt(activeDay), 'odd', parseInt(activeDay) === day);
     });
     
     // Обработчик для кнопки "На сегодня"
-    document.getElementById('todayBtn').addEventListener('click', () => {
-      renderSchedule(day, weekType, true);
+    document.getElementById('todayBtn').addEventListener('click', async () => {
+      await renderSchedule(day, weekType, true);
     });
     
     // Отображаем расписание на сегодня
