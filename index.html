@@ -654,23 +654,6 @@
     }
   }
 
-
-  function startTimeUpdates() {
-    setInterval(() => {
-      const today = new Date();
-      const day = today.getDay();
-      const weekType = isEvenWeek(today) ? "even" : "odd";
-      
-      const activeDay = document.querySelector('.day-btn.active');
-      if (activeDay) {
-        const activeDayId = parseInt(activeDay.id.split('-')[1]);
-        const isToday = activeDayId === day;
-        renderSchedule(activeDayId, weekType, isToday);
-      }
-    }, 30000); 
-  }
-
-
   document.addEventListener('DOMContentLoaded', function() {
     const today = new Date();
     const day = today.getDay();
