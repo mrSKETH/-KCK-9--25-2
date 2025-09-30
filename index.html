@@ -482,16 +482,14 @@
     6: "Суббота"
   };
 
-
-  function getWeekNumber(d) {
-    const start = new Date(d.getFullYear(),0,1);
-    const diff = d - start + ((start.getTimezoneOffset() - d.getTimezoneOffset())*60000);
-    return Math.floor(diff/(7*24*60*60*1000))+1;
-  }
+function isEvenWeek(d = new Date()) {
+  const semesterStart = new Date('2025-09-22');
   
-  function isEvenWeek(d=new Date()) {
-    return getWeekNumber(d)%2===0;
-  }
+  const diffTime = Math.abs(d - semesterStart);
+  const diffWeeks = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 7));
+  
+  return diffWeeks % 2 === 0;
+}
 
 
   function parseTime(timeStr) {
