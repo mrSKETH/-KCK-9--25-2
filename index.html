@@ -1021,8 +1021,8 @@
     // Обновляем отображение роли
     const userRoleElement = document.getElementById('userRole');
     userRoleElement.textContent = 
-      role === 'student' ? 'Студент' : 
-      role === 'monitor' ? 'Староста' : 'Куратор';
+      role === 'student' ? 'Расписание' : 
+      role === 'monitor' ? 'Изменение' : 'Админ';
     
     // Обновляем класс для стилизации
     userRoleElement.className = 'user-role ' + role;
