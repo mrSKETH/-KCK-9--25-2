@@ -32,11 +32,10 @@
       padding:40px 20px;
     }
 
-    /* фон с лого */
     .bg-logo {
       position: fixed; 
       inset: 0;
-      background-image: url(''); /* Здесь будет ваше лого */
+      background-image: url(''); 
       background-size: 300px;
       background-position: center;
       background-repeat: no-repeat;
@@ -51,7 +50,7 @@
       z-index: -1;
     }
 
-    /* заголовок с лого */
+
     .header {
       text-align: center;
       margin-bottom: 30px;
@@ -96,7 +95,7 @@
       color: var(--text-light);
     }
 
-    /* панель управления */
+
     .controls {
       display: flex;
       justify-content: center;
@@ -151,7 +150,7 @@
       box-shadow: 0 0 15px rgba(255, 171, 0, 0.5);
     }
 
-    /* навигация по дням */
+
     .day-nav {
       display: flex;
       justify-content: center;
@@ -183,7 +182,7 @@
       box-shadow: 0 0 15px rgba(76, 175, 80, 0.5);
     }
 
-    /* карточка расписания */
+
     .section {
       width:100%;
       max-width: 800px;
@@ -283,7 +282,7 @@
       color: var(--accent-green);
     }
     
-    /* индикатор текущей недели */
+
     .week-indicator {
       display: flex;
       justify-content: center;
@@ -318,7 +317,7 @@
       100% { opacity: 0.5; }
     }
     
-    /* адаптивность */
+
     @media (max-width: 768px) {
       .header h1 {
         font-size: 2rem;
@@ -385,17 +384,17 @@
   </div>
   
   <div class="day-nav" id="dayNav">
-    <!-- Кнопки дней будут добавлены через JS -->
+
   </div>
 
-  <!-- Основное расписание пар -->
+
   <div class="section" id="scheduleContent">
     <h2 id="weekTypeTitle">Загрузка...</h2>
     <ul id="todaySchedule"></ul>
   </div>
 
   <script>
-  // === расписание с временными интервалами ===
+
   const schedule = {
     1: { // понедельник
       even: [
@@ -473,7 +472,7 @@
     }
   };
 
-  // Названия дней недели
+
   const dayNames = {
     1: "Понедельник",
     2: "Вторник",
@@ -483,7 +482,7 @@
     6: "Суббота"
   };
 
-  // === вычисление недели ===
+
   function getWeekNumber(d) {
     const start = new Date(d.getFullYear(),0,1);
     const diff = d - start + ((start.getTimezoneOffset() - d.getTimezoneOffset())*60000);
@@ -494,7 +493,7 @@
     return getWeekNumber(d)%2===0;
   }
 
-  // === Функции для работы со временем ===
+
   function parseTime(timeStr) {
     const [hours, minutes] = timeStr.split(':').map(Number);
     const now = new Date();
@@ -534,7 +533,7 @@
     } else if (now >= timeRange.start && now <= timeRange.end) {
       return 'current';
     } else {
-      // Проверяем, является ли эта пара следующей
+
       const previousLesson = index > 0 ? allLessons[index - 1] : null;
       if (previousLesson) {
         const prevTimeRange = getLessonTimeRange(previousLesson.time);
@@ -571,7 +570,7 @@
         };
       
       case 'future':
-        // Для будущих пар показываем время до начала, если это первая пара дня
+
         if (index === 0 && now < timeRange.start) {
           const timeToStart = getTimeRemaining(timeRange.start);
           return {
@@ -586,7 +585,7 @@
     }
   }
 
-  // === Форматирование даты ===
+
   function formatDate(date) {
     const options = { 
       weekday: 'long', 
@@ -597,18 +596,18 @@
     return date.toLocaleDateString('ru-RU', options);
   }
 
-  // === Отображение расписания ===
+
   function renderSchedule(day, weekType, isToday = false) {
     const title = document.getElementById("weekTypeTitle");
     const list = document.getElementById("todaySchedule");
     
-    // Обновляем активную кнопку дня
+
     document.querySelectorAll('.day-btn').forEach(btn => {
       btn.classList.remove('active');
     });
     document.getElementById(`day-${day}`).classList.add('active');
     
-    // Обновляем активную кнопку недели
+
     document.querySelectorAll('#evenWeekBtn, #oddWeekBtn').forEach(btn => {
       btn.classList.remove('active');
     });
@@ -619,7 +618,7 @@
       document.getElementById('oddWeekBtn').classList.add('active');
     }
     
-    // Обновляем индикатор недели
+
     const weekDot = document.getElementById('weekDot');
     const weekIndicatorText = document.getElementById('weekIndicatorText');
     
@@ -655,7 +654,7 @@
     }
   }
 
-  // === Автоматическое обновление времени ===
+
   function startTimeUpdates() {
     setInterval(() => {
       const today = new Date();
@@ -668,19 +667,19 @@
         const isToday = activeDayId === day;
         renderSchedule(activeDayId, weekType, isToday);
       }
-    }, 30000); // Обновляем каждые 30 секунд
+    }, 30000); 
   }
 
-  // === Инициализация ===
+
   document.addEventListener('DOMContentLoaded', function() {
     const today = new Date();
     const day = today.getDay();
     const weekType = isEvenWeek(today) ? "even" : "odd";
     
-    // Устанавливаем текущую дату
+
     document.getElementById('currentDate').textContent = formatDate(today);
     
-    // Создаем навигацию по дням
+
     const dayNav = document.getElementById('dayNav');
     for (let i = 1; i <= 6; i++) {
       const button = document.createElement('button');
@@ -688,7 +687,7 @@
       button.id = `day-${i}`;
       button.textContent = dayNames[i];
       button.addEventListener('click', () => {
-        // Определяем текущий тип недели из активной кнопки
+
         const currentWeekType = document.getElementById('evenWeekBtn').classList.contains('active') ? 'even' : 'odd';
         const isToday = parseInt(button.id.split('-')[1]) === day;
         renderSchedule(i, currentWeekType, isToday);
@@ -696,7 +695,7 @@
       dayNav.appendChild(button);
     }
     
-    // Обработчики для кнопок недель
+
     document.getElementById('evenWeekBtn').addEventListener('click', () => {
       const activeDay = document.querySelector('.day-btn.active').id.split('-')[1];
       const isToday = parseInt(activeDay) === day;
@@ -709,17 +708,20 @@
       renderSchedule(parseInt(activeDay), 'odd', isToday);
     });
     
-    // Обработчик для кнопки "На сегодня"
+
     document.getElementById('todayBtn').addEventListener('click', () => {
       renderSchedule(day, weekType, true);
     });
     
-    // Отображаем расписание на сегодня
+
     renderSchedule(day, weekType, true);
     
-    // Запускаем автоматическое обновление времени
+
     startTimeUpdates();
   });
   </script>
+  <footer style="text-align: center; padding: 20px; margin-top: 30px; color: rgba(255,255,255,0.7); font-size: 0.8rem;">
+    Сайт сделал SKETH
+</footer>
 </body>
 </html>
