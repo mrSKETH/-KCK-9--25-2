@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="ru">
 <head>
@@ -19,8 +18,6 @@
       --success: #00c853;
       --danger: #ff3860;
       --warning: #ffab00;
-      --event-color: #9c27b0;
-      --edit-color: #2196f3;
     }
     
     *{margin:0;padding:0;box-sizing:border-box;}
@@ -152,17 +149,6 @@
       background: linear-gradient(135deg, #ffc400, var(--warning));
       box-shadow: 0 0 15px rgba(255, 171, 0, 0.5);
     }
-    
-    .add-event-btn {
-      background: linear-gradient(135deg, var(--event-color), #ba68c8);
-      color: var(--text-light);
-      font-weight: 600;
-    }
-    
-    .add-event-btn:hover {
-      background: linear-gradient(135deg, #ba68c8, var(--event-color));
-      box-shadow: 0 0 15px rgba(156, 39, 176, 0.5);
-    }
 
 
     .day-nav {
@@ -233,7 +219,6 @@
       box-shadow: inset 0 0 10px rgba(46, 125, 50, 0.2);
       transition: all 0.3s ease;
       border-left: 4px solid var(--green-light);
-      position: relative;
     }
     
     .lesson-item:hover {
@@ -255,59 +240,6 @@
     
     .lesson-item.future {
       border-left-color: var(--accent-green);
-    }
-    
-    .event-item {
-      border-left: 4px solid var(--event-color);
-      background: rgba(156, 39, 176, 0.1);
-      padding-right: 70px;
-    }
-    
-    .event-item:hover {
-      background: rgba(156, 39, 176, 0.15);
-    }
-    
-    .event-item .event-badge {
-      display: inline-block;
-      background: var(--event-color);
-      color: white;
-      padding: 2px 8px;
-      border-radius: 10px;
-      font-size: 0.8rem;
-      margin-left: 8px;
-      vertical-align: middle;
-    }
-    
-    .event-actions {
-      position: absolute;
-      right: 12px;
-      top: 12px;
-      display: flex;
-      gap: 8px;
-    }
-    
-    .event-btn {
-      background: none;
-      border: none;
-      color: rgba(255,255,255,0.7);
-      cursor: pointer;
-      font-size: 0.9rem;
-      padding: 4px 8px;
-      border-radius: 4px;
-      transition: all 0.2s ease;
-    }
-    
-    .event-btn:hover {
-      color: white;
-      background: rgba(255,255,255,0.1);
-    }
-    
-    .edit-btn:hover {
-      color: var(--edit-color);
-    }
-    
-    .delete-btn:hover {
-      color: var(--danger);
     }
     
     strong {
@@ -385,104 +317,6 @@
       100% { opacity: 0.5; }
     }
     
-    /* Модальное окно для добавления событий */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.7);
-      z-index: 1000;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .modal-content {
-      background: var(--glass);
-      backdrop-filter: blur(20px);
-      border-radius: 20px;
-      padding: 30px;
-      width: 90%;
-      max-width: 500px;
-      box-shadow: 0 0 30px rgba(0,0,0,0.5);
-      border: 1px solid rgba(255,255,255,0.2);
-    }
-    
-    .modal h2 {
-      margin-bottom: 20px;
-      text-align: center;
-      color: var(--text-light);
-    }
-    
-    .form-group {
-      margin-bottom: 20px;
-    }
-    
-    .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 500;
-    }
-    
-    .form-group input, .form-group select, .form-group textarea {
-      width: 100%;
-      padding: 12px;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.2);
-      background: rgba(255,255,255,0.1);
-      color: var(--text-light);
-      font-size: 1rem;
-    }
-    
-    .form-group textarea {
-      min-height: 100px;
-      resize: vertical;
-    }
-    
-    .form-actions {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-    }
-    
-    .form-actions button {
-      flex: 1;
-      padding: 12px;
-      border: none;
-      border-radius: 10px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    
-    .save-btn {
-      background: linear-gradient(135deg, var(--primary-green), var(--green-light));
-      color: var(--text-light);
-    }
-    
-    .save-btn:hover {
-      background: linear-gradient(135deg, var(--green-light), var(--primary-green));
-    }
-    
-    .cancel-btn {
-      background: rgba(255,255,255,0.1);
-      color: var(--text-light);
-    }
-    
-    .cancel-btn:hover {
-      background: rgba(255,255,255,0.2);
-    }
-    
-    .delete-event-btn {
-      background: linear-gradient(135deg, var(--danger), #ff6b8b);
-      color: var(--text-light);
-    }
-    
-    .delete-event-btn:hover {
-      background: linear-gradient(135deg, #ff6b8b, var(--danger));
-    }
 
     @media (max-width: 768px) {
       .header h1 {
@@ -513,20 +347,6 @@
         align-items: flex-start;
         gap: 5px;
       }
-      
-      .modal-content {
-        padding: 20px;
-      }
-      
-      .event-item {
-        padding-right: 12px;
-      }
-      
-      .event-actions {
-        position: static;
-        margin-top: 10px;
-        justify-content: flex-end;
-      }
     }
   </style>
 </head>
@@ -547,9 +367,6 @@
       <button class="control-btn today-btn" id="todayBtn">
         <i class="fas fa-calendar-day"></i> На сегодня
       </button>
-      <button class="control-btn add-event-btn" id="addEventBtn">
-        <i class="fas fa-plus"></i> Добавить событие
-      </button>
     </div>
     <div class="control-group">
       <button class="control-btn" id="evenWeekBtn">
@@ -567,571 +384,325 @@
   </div>
   
   <div class="day-nav" id="dayNav">
-    <!-- Будет заполнено JavaScript -->
+
   </div>
+
 
   <div class="section" id="scheduleContent">
     <h2 id="weekTypeTitle">Загрузка...</h2>
     <ul id="todaySchedule"></ul>
   </div>
 
-  <!-- Модальное окно для добавления/редактирования событий -->
-  <div class="modal" id="eventModal">
-    <div class="modal-content">
-      <h2 id="modalTitle">Добавить событие</h2>
-      <form id="eventForm">
-        <input type="hidden" id="eventId">
-        <div class="form-group">
-          <label for="eventDate">Дата события</label>
-          <input type="date" id="eventDate" required>
-        </div>
-        <div class="form-group">
-          <label for="eventTitle">Название события</label>
-          <input type="text" id="eventTitle" placeholder="Например: Дистанционное обучение" required>
-        </div>
-        <div class="form-group">
-          <label for="eventDescription">Описание (необязательно)</label>
-          <textarea id="eventDescription" placeholder="Дополнительная информация о событии"></textarea>
-        </div>
-        <div class="form-actions">
-          <button type="button" class="cancel-btn" id="cancelEventBtn">Отмена</button>
-          <button type="button" class="delete-event-btn" id="deleteEventBtn" style="display: none;">Удалить</button>
-          <button type="submit" class="save-btn">Сохранить</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
   <script>
-    const schedule = {
-      1: { // понедельник
-        even: [
-          {subject: "Кл. час", room: "П-205", time: "8:30-9:50"},
-          {subject: "Биология", room: "П-205", time: "10:00-11:20"},
-          {subject: "История", room: "П-205", time: "11:50-13:10"},
-          {subject: "ОБЖР", room: "П-205", time: "13:20-14:40"}
-        ],
-        odd: [
-          {subject: "Кл. час", room: "П-205", time: "8:30-9:50"},
-          {subject: "Физика", room: "П-205", time: "10:00-11:20"},
-          {subject: "Математика", room: "П-205", time: "11:50-13:10"},
-          {subject: "Иностранный язык", room: "П-205", time: "13:20-14:40"}
-        ]
-      },
-      2: { // вторник
-        even: [
-          {subject: "Математика", room: "П-205", time: "8:30-9:50"},
-          {subject: "Физика", room: "П-205", time: "10:00-11:20"},
-          {subject: "География", room: "П-205", time: "11:50-13:10"}
-        ],
-        odd: [
-          {subject: "Индивидуальный проект", room: "П-205", time: "8:30-9:50"},
-          {subject: "История", room: "П-205", time: "10:00-11:20"},
-          {subject: "Литература", room: "П-205", time: "11:50-13:10"}
-        ]
-      },
-      3: { // среда
-        even: [
-          {subject: "Математика", room: "П-205", time: "8:30-9:50"},
-          {subject: "История", room: "П-205", time: "10:00-11:20"},
-          {subject: "ОБЖР", room: "П-205", time: "11:50-13:10"}
-        ],
-        odd: [
-          {subject: "Информатика", room: "П-205", time: "8:30-9:50"},
-          {subject: "Физика", room: "П-205", time: "10:00-11:20"}
-        ]
-      },
-      4: { // четверг
-        even: [
-          {subject: "Иностранный язык", room: "П-205", time: "8:30-9:50"},
-          {subject: "Русский язык", room: "П-205", time: "10:00-11:20"},
-          {subject: "Информатика", room: "П-205", time: "11:50-13:10"}
-        ],
-        odd: [
-          {subject: "Русский язык", room: "П-205", time: "8:30-9:50"},
-          {subject: "Математика", room: "П-205", time: "10:00-11:20"},
-          {subject: "География", room: "П-205", time: "11:50-13:10"}
-        ]
-      },
-      5: { // пятница
-        even: [
-          {subject: "Физкультура", room: "П-205", time: "8:30-9:50"},
-          {subject: "Физика", room: "П-205", time: "10:00-11:20"},
-          {subject: "Математика", room: "П-205", time: "11:50-13:10"}
-        ],
-        odd: [
-          {subject: "ОБЖР", room: "П-205", time: "8:30-9:50"},
-          {subject: "Обществознание", room: "П-205", time: "10:00-11:20"},
-          {subject: "Физкультура", room: "П-205", time: "11:50-13:10"},
-          {subject: "Биология", room: "П-205", time: "13:20-14:40"}
-        ]
-      },
-      6: { // суббота
-        even: [
-          {subject: "Литература", room: "П-205", time: "8:30-9:50"},
-          {subject: "Математика", room: "П-205", time: "10:00-11:20"},
-          {subject: "Обществознание", room: "П-205", time: "11:50-13:10"}
-        ],
-        odd: [
-          {subject: "Химия", room: "П-205", time: "8:30-9:50"},
-          {subject: "Математика", room: "П-205", time: "10:00-11:20"},
-          {subject: "История", room: "П-205", time: "11:50-13:10"}
-        ]
-      }
+
+  const schedule = {
+    1: { // понедельник
+      even: [
+        {subject: "Кл. час", room: "П-205", time: "8:30-9:50"},
+        {subject: "Биология", room: "П-205", time: "10:00-11:20"},
+        {subject: "История", room: "П-205", time: "11:50-13:10"},
+        {subject: "ОБЖР", room: "П-205", time: "13:20-14:40"}
+      ],
+      odd: [
+        {subject: "Кл. час", room: "П-205", time: "8:30-9:50"},
+        {subject: "Физика", room: "П-205", time: "10:00-11:20"},
+        {subject: "Математика", room: "П-205", time: "11:50-13:10"},
+        {subject: "Иностранный язык", room: "П-205", time: "13:20-14:40"}
+      ]
+    },
+    2: { // вторник
+      even: [
+        {subject: "Математика", room: "П-205", time: "8:30-9:50"},
+        {subject: "Физика", room: "П-205", time: "10:00-11:20"},
+        {subject: "География", room: "П-205", time: "11:50-13:10"}
+      ],
+      odd: [
+        {subject: "Индивидуальный проект", room: "П-205", time: "8:30-9:50"},
+        {subject: "История", room: "П-205", time: "10:00-11:20"},
+        {subject: "Литература", room: "П-205", time: "11:50-13:10"}
+      ]
+    },
+    3: { // среда
+      even: [
+        {subject: "Математика", room: "П-205", time: "8:30-9:50"},
+        {subject: "История", room: "П-205", time: "10:00-11:20"},
+        {subject: "ОБЖР", room: "П-205", time: "11:50-13:10"}
+      ],
+      odd: [
+        {subject: "Информатика", room: "П-205", time: "8:30-9:50"},
+        {subject: "Физика", room: "П-205", time: "10:00-11:20"}
+      ]
+    },
+    4: { // четверг
+      even: [
+        {subject: "Иностранный язык", room: "П-205", time: "8:30-9:50"},
+        {subject: "Русский язык", room: "П-205", time: "10:00-11:20"},
+        {subject: "Информатика", room: "П-205", time: "11:50-13:10"}
+      ],
+      odd: [
+        {subject: "Русский язык", room: "П-205", time: "8:30-9:50"},
+        {subject: "Математика", room: "П-205", time: "10:00-11:20"},
+        {subject: "География", room: "П-205", time: "11:50-13:10"}
+      ]
+    },
+    5: { // пятница
+      even: [
+        {subject: "Физкультура", room: "П-205", time: "8:30-9:50"},
+        {subject: "Физика", room: "П-205", time: "10:00-11:20"},
+        {subject: "Математика", room: "П-205", time: "11:50-13:10"}
+      ],
+      odd: [
+        {subject: "ОБЖР", room: "П-205", time: "8:30-9:50"},
+        {subject: "Обществознание", room: "П-205", time: "10:00-11:20"},
+        {subject: "Физкультура", room: "П-205", time: "11:50-13:10"},
+        {subject: "Биология", room: "П-205", time: "13:20-14:40"}
+      ]
+    },
+    6: { // суббота
+      even: [
+        {subject: "Литература", room: "П-205", time: "8:30-9:50"},
+        {subject: "Математика", room: "П-205", time: "10:00-11:20"},
+        {subject: "Обществознание", room: "П-205", time: "11:50-13:10"}
+      ],
+      odd: [
+        {subject: "Химия", room: "П-205", time: "8:30-9:50"},
+        {subject: "Математика", room: "П-205", time: "10:00-11:20"},
+        {subject: "История", room: "П-205", time: "11:50-13:10"}
+      ]
+    }
+  };
+
+
+  const dayNames = {
+    1: "Понедельник",
+    2: "Вторник",
+    3: "Среда",
+    4: "Четверг",
+    5: "Пятница",
+    6: "Суббота"
+  };
+
+function isEvenWeek(d = new Date()) {
+  const semesterStart = new Date('2025-09-22');
+  
+  const diffTime = Math.abs(d - semesterStart);
+  const diffWeeks = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 7));
+  
+  return diffWeeks % 2 === 0;
+}
+
+
+  function parseTime(timeStr) {
+    const [hours, minutes] = timeStr.split(':').map(Number);
+    const now = new Date();
+    return new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes);
+  }
+
+  function getLessonTimeRange(timeStr) {
+    const [startStr, endStr] = timeStr.split('-');
+    return {
+      start: parseTime(startStr),
+      end: parseTime(endStr)
     };
+  }
 
-    // Хранилище событий
-    let events = JSON.parse(localStorage.getItem('scheduleEvents')) || {};
-
-    const dayNames = {
-      1: "Понедельник",
-      2: "Вторник",
-      3: "Среда",
-      4: "Четверг",
-      5: "Пятница",
-      6: "Суббота"
-    };
-
-    // Функция для очистки прошедших событий
-    function cleanupPastEvents() {
-      const today = new Date();
-      const todayKey = getDateKey(today);
-      
-      Object.keys(events).forEach(dateKey => {
-        // Удаляем события, которые были раньше сегодняшнего дня
-        if (dateKey < todayKey) {
-          delete events[dateKey];
-        }
-      });
-      
-      // Сохраняем обновленные события
-      localStorage.setItem('scheduleEvents', JSON.stringify(events));
+  function getTimeRemaining(targetTime) {
+    const now = new Date();
+    const diff = targetTime - now;
+    
+    if (diff <= 0) return null;
+    
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    
+    if (hours > 0) {
+      return `${hours}ч ${minutes}м`;
+    } else {
+      return `${minutes}м`;
     }
+  }
 
-    function isEvenWeek(d = new Date()) {
-      const semesterStart = new Date('2025-09-22');
-      
-      const diffTime = Math.abs(d - semesterStart);
-      const diffWeeks = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 7));
-      
-      return diffWeeks % 2 === 0;
-    }
+  function getLessonStatus(lesson, index, allLessons) {
+    const now = new Date();
+    const timeRange = getLessonTimeRange(lesson.time);
+    
+    if (now > timeRange.end) {
+      return 'past';
+    } else if (now >= timeRange.start && now <= timeRange.end) {
+      return 'current';
+    } else {
 
-    function parseTime(timeStr) {
-      const [hours, minutes] = timeStr.split(':').map(Number);
-      const now = new Date();
-      return new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes);
-    }
-
-    function getLessonTimeRange(timeStr) {
-      const [startStr, endStr] = timeStr.split('-');
-      return {
-        start: parseTime(startStr),
-        end: parseTime(endStr)
-      };
-    }
-
-    function getTimeRemaining(targetTime) {
-      const now = new Date();
-      const diff = targetTime - now;
-      
-      if (diff <= 0) return null;
-      
-      const hours = Math.floor(diff / (1000 * 60 * 60));
-      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      
-      if (hours > 0) {
-        return `${hours}ч ${minutes}м`;
-      } else {
-        return `${minutes}м`;
-      }
-    }
-
-    function getLessonStatus(lesson, index, allLessons) {
-      const now = new Date();
-      const timeRange = getLessonTimeRange(lesson.time);
-      
-      if (now > timeRange.end) {
-        return 'past';
-      } else if (now >= timeRange.start && now <= timeRange.end) {
-        return 'current';
-      } else {
-        const previousLesson = index > 0 ? allLessons[index - 1] : null;
-        if (previousLesson) {
-          const prevTimeRange = getLessonTimeRange(previousLesson.time);
-          if (now > prevTimeRange.end && now < timeRange.start) {
-            return 'next';
-          }
-        } else if (now < timeRange.start) {
+      const previousLesson = index > 0 ? allLessons[index - 1] : null;
+      if (previousLesson) {
+        const prevTimeRange = getLessonTimeRange(previousLesson.time);
+        if (now > prevTimeRange.end && now < timeRange.start) {
           return 'next';
         }
-        return 'future';
+      } else if (now < timeRange.start) {
+        return 'next';
       }
+      return 'future';
     }
+  }
 
-    function getStatusInfo(lesson, status, index, allLessons) {
-      const now = new Date();
-      const timeRange = getLessonTimeRange(lesson.time);
+  function getStatusInfo(lesson, status, index, allLessons) {
+    const now = new Date();
+    const timeRange = getLessonTimeRange(lesson.time);
+    
+    switch(status) {
+      case 'past':
+        return null;
       
-      switch(status) {
-        case 'past':
-          return null;
-        
-        case 'current':
-          const timeLeft = getTimeRemaining(timeRange.end);
-          return {
-            text: `⏳ Идет сейчас • До конца: ${timeLeft}`,
-            class: 'status-current'
-          };
-        
-        case 'next':
+      case 'current':
+        const timeLeft = getTimeRemaining(timeRange.end);
+        return {
+          text: `⏳ Идет сейчас • До конца: ${timeLeft}`,
+          class: 'status-current'
+        };
+      
+      case 'next':
+        const timeToStart = getTimeRemaining(timeRange.start);
+        return {
+          text: `🕐 Следующая пара • До начала: ${timeToStart}`,
+          class: 'status-next'
+        };
+      
+      case 'future':
+
+        if (index === 0 && now < timeRange.start) {
           const timeToStart = getTimeRemaining(timeRange.start);
           return {
-            text: `🕐 Следующая пара • До начала: ${timeToStart}`,
+            text: `🕐 До начала: ${timeToStart}`,
             class: 'status-next'
           };
-        
-        case 'future':
-          if (index === 0 && now < timeRange.start) {
-            const timeToStart = getTimeRemaining(timeRange.start);
-            return {
-              text: `🕐 До начала: ${timeToStart}`,
-              class: 'status-next'
-            };
-          }
-          return null;
-        
-        default:
-          return null;
-      }
-    }
-
-    function formatDate(date) {
-      const options = { 
-        weekday: 'long', 
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric' 
-      };
-      return date.toLocaleDateString('ru-RU', options);
-    }
-
-    // Функция для получения даты в формате YYYY-MM-DD
-    function getDateKey(date) {
-      return date.toISOString().split('T')[0];
-    }
-
-    // Функция для получения дня недели из даты
-    function getDayFromDate(date) {
-      return date.getDay() || 7; // Преобразуем воскресенье (0) в 7
-    }
-
-    // Функция для генерации уникального ID
-    function generateId() {
-      return Date.now().toString(36) + Math.random().toString(36).substr(2);
-    }
-
-    // Функция для отображения расписания
-    function renderSchedule(day, weekType, isToday = false) {
-      const title = document.getElementById("weekTypeTitle");
-      const list = document.getElementById("todaySchedule");
+        }
+        return null;
       
-      // Обновляем активные кнопки
-      document.querySelectorAll('.day-btn').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      document.getElementById(`day-${day}`).classList.add('active');
+      default:
+        return null;
+    }
+  }
+
+
+  function formatDate(date) {
+    const options = { 
+      weekday: 'long', 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    };
+    return date.toLocaleDateString('ru-RU', options);
+  }
+
+
+  function renderSchedule(day, weekType, isToday = false) {
+    const title = document.getElementById("weekTypeTitle");
+    const list = document.getElementById("todaySchedule");
+    
+
+    document.querySelectorAll('.day-btn').forEach(btn => {
+      btn.classList.remove('active');
+    });
+    document.getElementById(`day-${day}`).classList.add('active');
+    
+
+    document.querySelectorAll('#evenWeekBtn, #oddWeekBtn').forEach(btn => {
+      btn.classList.remove('active');
+    });
+    
+    if (weekType === "even") {
+      document.getElementById('evenWeekBtn').classList.add('active');
+    } else {
+      document.getElementById('oddWeekBtn').classList.add('active');
+    }
+    
+
+    const weekDot = document.getElementById('weekDot');
+    const weekIndicatorText = document.getElementById('weekIndicatorText');
+    
+    weekDot.className = `week-dot ${weekType}`;
+    weekIndicatorText.textContent = weekType === "even" ? "Чётная неделя / нижнее" : "Нечётная неделя / верхнее";
+    
+    if(day === 0){
+      title.textContent = "Воскресенье 🎉";
+      list.innerHTML = "<li class='lesson-item'>Выходной день! Отдыхайте!</li>";
+    } else {
+      const todayIndicator = isToday ? " • Сегодня" : "";
+      title.textContent = `${dayNames[day]}${todayIndicator} • ${weekType === "even" ? "Чётная неделя" : "Нечётная неделя"}`;
+      const lessons = schedule[day][weekType] || [];
       
-      // Обновляем активные кнопки недели
-      document.querySelectorAll('#evenWeekBtn, #oddWeekBtn').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      
-      if (weekType === "even") {
-        document.getElementById('evenWeekBtn').classList.add('active');
+      if (lessons.length === 0) {
+        list.innerHTML = "<li class='lesson-item'>На этот день нет расписания</li>";
       } else {
-        document.getElementById('oddWeekBtn').classList.add('active');
-      }
-      
-      // Обновляем индикатор недели
-      const weekDot = document.getElementById('weekDot');
-      const weekIndicatorText = document.getElementById('weekIndicatorText');
-      
-      weekDot.className = `week-dot ${weekType}`;
-      weekIndicatorText.textContent = weekType === "even" ? "Чётная неделя / нижнее" : "Нечётная неделя / верхнее";
-      
-      if(day === 0){
-        title.textContent = "Воскресенье 🎉";
-        list.innerHTML = "<li class='lesson-item'>Выходной день! Отдыхайте!</li>";
-      } else {
-        const todayIndicator = isToday ? " • Сегодня" : "";
-        title.textContent = `${dayNames[day]}${todayIndicator} • ${weekType === "even" ? "Чётная неделя" : "Нечётная неделя"}`;
-        const lessons = schedule[day][weekType] || [];
-        
-        // Получаем события для этого дня
-        const today = new Date();
-        const currentDate = new Date(today);
-        const dayDiff = day - (today.getDay() || 7);
-        currentDate.setDate(today.getDate() + dayDiff);
-        const dateKey = getDateKey(currentDate);
-        const dayEvents = events[dateKey] || [];
-        
-        // Создаем HTML для уроков
-        let scheduleHTML = '';
-        
-        // Добавляем события в начало расписания
-        dayEvents.forEach(event => {
-          scheduleHTML += `<li class="lesson-item event-item" data-event-id="${event.id}">
-            <strong>${event.title} <span class="event-badge">Событие</span></strong>
-            ${event.description ? `<div class="lesson-time">${event.description}</div>` : ''}
-            <div class="event-actions">
-              <button class="event-btn edit-btn" title="Редактировать">
-                <i class="fas fa-edit"></i>
-              </button>
-              <button class="event-btn delete-btn" title="Удалить">
-                <i class="fas fa-trash"></i>
-              </button>
-            </div>
+        list.innerHTML = lessons.map((lesson, i) => {
+          const status = isToday ? getLessonStatus(lesson, i, lessons) : 'future';
+          const statusInfo = isToday ? getStatusInfo(lesson, status, i, lessons) : null;
+          
+          return `<li class="lesson-item ${status}">
+            <strong>${i+1}. ${lesson.subject} (${lesson.room})</strong>
+            <div class="lesson-time">🕐 ${lesson.time}</div>
+            ${statusInfo ? `
+              <div class="lesson-status ${statusInfo.class}">
+                ${statusInfo.text}
+              </div>
+            ` : ''}
           </li>`;
-        });
-        
-        // Добавляем уроки
-        if (lessons.length === 0 && dayEvents.length === 0) {
-          scheduleHTML += "<li class='lesson-item'>На этот день нет расписания</li>";
-        } else {
-          scheduleHTML += lessons.map((lesson, i) => {
-            const status = isToday ? getLessonStatus(lesson, i, lessons) : 'future';
-            const statusInfo = isToday ? getStatusInfo(lesson, status, i, lessons) : null;
-            
-            return `<li class="lesson-item ${status}">
-              <strong>${i+1}. ${lesson.subject} (${lesson.room})</strong>
-              <div class="lesson-time">🕐 ${lesson.time}</div>
-              ${statusInfo ? `
-                <div class="lesson-status ${statusInfo.class}">
-                  ${statusInfo.text}
-                </div>
-              ` : ''}
-            </li>`;
-          }).join("");
-        }
-        
-        list.innerHTML = scheduleHTML;
-        
-        // Добавляем обработчики для кнопок событий
-        document.querySelectorAll('.edit-btn').forEach(btn => {
-          btn.addEventListener('click', function() {
-            const eventItem = this.closest('.event-item');
-            const eventId = eventItem.dataset.eventId;
-            editEvent(eventId);
-          });
-        });
-        
-        document.querySelectorAll('.delete-btn').forEach(btn => {
-          btn.addEventListener('click', function() {
-            const eventItem = this.closest('.event-item');
-            const eventId = eventItem.dataset.eventId;
-            deleteEvent(eventId);
-          });
-        });
+        }).join("");
       }
     }
+  }
 
-    // Функция для открытия модального окна
-    function openEventModal(eventId = null) {
-      const modal = document.getElementById('eventModal');
-      const modalTitle = document.getElementById('modalTitle');
-      const deleteBtn = document.getElementById('deleteEventBtn');
-      const today = new Date();
-      const dateInput = document.getElementById('eventDate');
-      
-      if (eventId) {
-        // Режим редактирования
-        modalTitle.textContent = 'Редактировать событие';
-        deleteBtn.style.display = 'block';
-        
-        // Находим событие
-        let eventToEdit = null;
-        Object.keys(events).forEach(dateKey => {
-          events[dateKey].forEach(event => {
-            if (event.id === eventId) {
-              eventToEdit = event;
-            }
-          });
-        });
-        
-        if (eventToEdit) {
-          document.getElementById('eventId').value = eventToEdit.id;
-          document.getElementById('eventDate').value = eventToEdit.date;
-          document.getElementById('eventTitle').value = eventToEdit.title;
-          document.getElementById('eventDescription').value = eventToEdit.description || '';
-        }
-      } else {
-        // Режим добавления
-        modalTitle.textContent = 'Добавить событие';
-        deleteBtn.style.display = 'none';
-        
-        // Устанавливаем сегодняшнюю дату по умолчанию
-        dateInput.value = getDateKey(today);
-        
-        // Очищаем форму
-        document.getElementById('eventId').value = '';
-        document.getElementById('eventTitle').value = '';
-        document.getElementById('eventDescription').value = '';
-      }
-      
-      modal.style.display = 'flex';
+  document.addEventListener('DOMContentLoaded', function() {
+    const today = new Date();
+    const day = today.getDay();
+    const weekType = isEvenWeek(today) ? "even" : "odd";
+    
+
+    document.getElementById('currentDate').textContent = formatDate(today);
+    
+
+    const dayNav = document.getElementById('dayNav');
+    for (let i = 1; i <= 6; i++) {
+      const button = document.createElement('button');
+      button.className = `day-btn ${i === day ? 'active' : ''}`;
+      button.id = `day-${i}`;
+      button.textContent = dayNames[i];
+      button.addEventListener('click', () => {
+
+        const currentWeekType = document.getElementById('evenWeekBtn').classList.contains('active') ? 'even' : 'odd';
+        const isToday = parseInt(button.id.split('-')[1]) === day;
+        renderSchedule(i, currentWeekType, isToday);
+      });
+      dayNav.appendChild(button);
     }
+    
 
-    // Функция для закрытия модального окна
-    function closeEventModal() {
-      document.getElementById('eventModal').style.display = 'none';
-    }
-
-    // Функция для сохранения события
-    function saveEvent(event) {
-      event.preventDefault();
-      
-      const eventId = document.getElementById('eventId').value;
-      const date = document.getElementById('eventDate').value;
-      const title = document.getElementById('eventTitle').value;
-      const description = document.getElementById('eventDescription').value;
-      
-      // Создаем объект события
-      const newEvent = {
-        id: eventId || generateId(),
-        title: title,
-        description: description,
-        date: date
-      };
-      
-      if (eventId) {
-        // Режим редактирования - удаляем старое событие
-        Object.keys(events).forEach(dateKey => {
-          events[dateKey] = events[dateKey].filter(event => event.id !== eventId);
-          if (events[dateKey].length === 0) {
-            delete events[dateKey];
-          }
-        });
-      }
-      
-      // Добавляем событие в хранилище
-      if (!events[date]) {
-        events[date] = [];
-      }
-      events[date].push(newEvent);
-      
-      // Сохраняем в localStorage
-      localStorage.setItem('scheduleEvents', JSON.stringify(events));
-      
-      // Закрываем модальное окно
-      closeEventModal();
-      
-      // Обновляем отображение расписания
+    document.getElementById('evenWeekBtn').addEventListener('click', () => {
       const activeDay = document.querySelector('.day-btn.active').id.split('-')[1];
-      const weekType = document.getElementById('evenWeekBtn').classList.contains('active') ? 'even' : 'odd';
-      const today = new Date();
-      const isToday = parseInt(activeDay) === (today.getDay() || 7);
-      renderSchedule(parseInt(activeDay), weekType, isToday);
-    }
+      const isToday = parseInt(activeDay) === day;
+      renderSchedule(parseInt(activeDay), 'even', isToday);
+    });
+    
+    document.getElementById('oddWeekBtn').addEventListener('click', () => {
+      const activeDay = document.querySelector('.day-btn.active').id.split('-')[1];
+      const isToday = parseInt(activeDay) === day;
+      renderSchedule(parseInt(activeDay), 'odd', isToday);
+    });
+    
 
-    // Функция для редактирования события
-    function editEvent(eventId) {
-      openEventModal(eventId);
-    }
-
-    // Функция для удаления события
-    function deleteEvent(eventId) {
-      if (confirm('Вы уверены, что хотите удалить это событие?')) {
-        // Удаляем событие из хранилища
-        Object.keys(events).forEach(dateKey => {
-          events[dateKey] = events[dateKey].filter(event => event.id !== eventId);
-          if (events[dateKey].length === 0) {
-            delete events[dateKey];
-          }
-        });
-        
-        // Сохраняем в localStorage
-        localStorage.setItem('scheduleEvents', JSON.stringify(events));
-        
-        // Обновляем отображение расписания
-        const activeDay = document.querySelector('.day-btn.active').id.split('-')[1];
-        const weekType = document.getElementById('evenWeekBtn').classList.contains('active') ? 'even' : 'odd';
-        const today = new Date();
-        const isToday = parseInt(activeDay) === (today.getDay() || 7);
-        renderSchedule(parseInt(activeDay), weekType, isToday);
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-      // Очищаем прошедшие события при загрузке
-      cleanupPastEvents();
-      
-      const today = new Date();
-      const day = today.getDay() || 7; // Преобразуем воскресенье (0) в 7
-      const weekType = isEvenWeek(today) ? "even" : "odd";
-      
-      // Обновляем текущую дату
-      document.getElementById('currentDate').textContent = formatDate(today);
-      
-      // Создаем кнопки дней недели
-      const dayNav = document.getElementById('dayNav');
-      for (let i = 1; i <= 6; i++) {
-        const button = document.createElement('button');
-        button.className = `day-btn ${i === day ? 'active' : ''}`;
-        button.id = `day-${i}`;
-        button.textContent = dayNames[i];
-        button.addEventListener('click', () => {
-          // Получаем текущий тип недели
-          const currentWeekType = document.getElementById('evenWeekBtn').classList.contains('active') ? 'even' : 'odd';
-          const isToday = parseInt(button.id.split('-')[1]) === day;
-          renderSchedule(parseInt(button.id.split('-')[1]), currentWeekType, isToday);
-        });
-        dayNav.appendChild(button);
-      }
-      
-      // Обработчики для кнопок недели
-      document.getElementById('evenWeekBtn').addEventListener('click', () => {
-        const activeDay = document.querySelector('.day-btn.active').id.split('-')[1];
-        const isToday = parseInt(activeDay) === day;
-        renderSchedule(parseInt(activeDay), 'even', isToday);
-      });
-      
-      document.getElementById('oddWeekBtn').addEventListener('click', () => {
-        const activeDay = document.querySelector('.day-btn.active').id.split('-')[1];
-        const isToday = parseInt(activeDay) === day;
-        renderSchedule(parseInt(activeDay), 'odd', isToday);
-      });
-      
-      // Обработчик для кнопки "На сегодня"
-      document.getElementById('todayBtn').addEventListener('click', () => {
-        renderSchedule(day, weekType, true);
-      });
-      
-      // Обработчик для кнопки добавления события
-      document.getElementById('addEventBtn').addEventListener('click', () => openEventModal());
-      
-      // Обработчики для модального окна
-      document.getElementById('cancelEventBtn').addEventListener('click', closeEventModal);
-      document.getElementById('deleteEventBtn').addEventListener('click', function() {
-        const eventId = document.getElementById('eventId').value;
-        closeEventModal();
-        deleteEvent(eventId);
-      });
-      document.getElementById('eventForm').addEventListener('submit', saveEvent);
-      
-      // Закрытие модального окна при клике вне его
-      document.getElementById('eventModal').addEventListener('click', (e) => {
-        if (e.target.id === 'eventModal') {
-          closeEventModal();
-        }
-      });
-      
-      // Инициализация расписания
+    document.getElementById('todayBtn').addEventListener('click', () => {
       renderSchedule(day, weekType, true);
     });
+    
+
+    renderSchedule(day, weekType, true);
+    
+
+    startTimeUpdates();
+  });
   </script>
   <footer style="text-align: center; padding: 20px; margin-top: 30px; color: rgba(255,255,255,0.7); font-size: 0.8rem;">
     by SKETH
-  </footer>
+</footer>
 </body>
-</html>
+  </html>
