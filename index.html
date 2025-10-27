@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Расписание</title>
+  <title>Расписание КСК(9)-25-2</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     :root {
@@ -18,6 +18,8 @@
       --success: #00c853;
       --danger: #ff3860;
       --warning: #ffab00;
+      --info: #2196f3;
+      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     
     *{margin:0;padding:0;box-sizing:border-box;}
@@ -30,6 +32,13 @@
       overflow-x:hidden;
       position: relative;
       padding:40px 20px;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     .bg-logo {
@@ -50,6 +59,150 @@
       z-index: -1;
     }
 
+    .floating-elements {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .floating-element {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      animation: float 15s infinite linear;
+    }
+
+    .floating-element:nth-child(1) {
+      width: 80px;
+      height: 80px;
+      top: 10%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .floating-element:nth-child(2) {
+      width: 120px;
+      height: 120px;
+      top: 70%;
+      left: 80%;
+      animation-delay: -5s;
+    }
+
+    .floating-element:nth-child(3) {
+      width: 60px;
+      height: 60px;
+      top: 20%;
+      left: 85%;
+      animation-delay: -10s;
+    }
+
+    .floating-element:nth-child(4) {
+      width: 100px;
+      height: 100px;
+      top: 80%;
+      left: 15%;
+      animation-delay: -7s;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.7;
+      }
+      50% {
+        transform: translateY(-20px) rotate(180deg);
+        opacity: 0.3;
+      }
+      100% {
+        transform: translateY(0) rotate(360deg);
+        opacity: 0.7;
+      }
+    }
+
+
+    .important-info {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto 30px;
+      background: linear-gradient(135deg, rgba(33, 150, 243, 0.2), rgba(33, 150, 243, 0.4));
+      backdrop-filter: blur(15px) saturate(180%);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 0 25px rgba(33, 150, 243, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      position: relative;
+      overflow: hidden;
+      animation: slideDown 0.8s ease;
+    }
+
+    .important-info::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s;
+    }
+
+    .important-info:hover::before {
+      transform: translateX(100%);
+    }
+
+    .important-info-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .important-info-icon {
+      font-size: 1.5rem;
+      color: var(--info);
+      animation: pulse 2s infinite;
+    }
+
+    .important-info-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--text-light);
+      text-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    .important-info-content {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--text-light);
+    }
+
+    .important-info-item {
+      margin-bottom: 12px;
+      padding-left: 10px;
+      border-left: 3px solid var(--info);
+      transition: var(--transition);
+    }
+
+    .important-info-item:hover {
+      transform: translateX(5px);
+      border-left-color: var(--accent-green);
+    }
+
+    .important-info-date {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-weight: 500;
+      margin-top: 5px;
+    }
 
     .header {
       text-align: center;
@@ -59,6 +212,18 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      animation: slideDown 0.8s ease;
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
     
     .logo-container {
@@ -72,12 +237,19 @@
       margin-bottom: 20px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.2);
       overflow: hidden;
+      animation: pulse 2s infinite;
+      transition: var(--transition);
+    }
+
+    .logo-container:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
     }
     
     .logo-placeholder {
       width: 100%;
       height: 100%;
-      background-image: url('https://sun1-21.userapi.com/s/v1/ig2/66JFDgO03eGBNPtFpAQskAOEJyoBFECrA8H20BFqV-_1yifqmS0ZzPZCJ-Rh3WrQaBtfiqJBVrkyn3tTJmxgUzYm.jpg?quality=95&crop=39,50,561,561&as=32x32,48x48,72x72,108x108,160x160,240x240,360x360,480x480,540x540&ava=1&cs=240x240'); /* Здесь будет ваше лого */
+      background-image: url('https://sun1-21.userapi.com/s/v1/ig2/66JFDgO03eGBNPtFpAQskAOEJyoBFECrA8H20BFqV-_1yifqmS0ZzPZCJ-Rh3WrQaBtfiqJBVrkyn3tTJmxgUzYm.jpg?quality=95&crop=39,50,561,561&as=32x32,48x48,72x72,108x108,160x160,240x240,360x360,480x480,540x540&ava=1&cs=240x240');
       background-size: cover;
       background-position: center;
     }
@@ -87,14 +259,27 @@
       margin-bottom: 10px;
       text-shadow: 0 0 10px rgba(0,0,0,0.3);
       color: var(--bg-white);
+      position: relative;
+      display: inline-block;
+    }
+
+    .header h1::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 10%;
+      width: 80%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--accent-green), transparent);
+      border-radius: 3px;
     }
     
     .header p {
       opacity: 0.9;
       font-size: 1.1rem;
       color: var(--text-light);
+      margin-top: 10px;
     }
-
 
     .controls {
       display: flex;
@@ -102,6 +287,18 @@
       gap: 15px;
       margin-bottom: 25px;
       flex-wrap: wrap;
+      animation: slideUp 0.8s ease 0.2s both;
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(30px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
     
     .control-group {
@@ -113,6 +310,12 @@
       border-radius: 12px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
       border: 1px solid rgba(255,255,255,0.2);
+      transition: var(--transition);
+    }
+
+    .control-group:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     }
     
     .control-btn {
@@ -122,11 +325,28 @@
       background: rgba(255,255,255,0.1);
       color: var(--text-light);
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: var(--transition);
       display: flex;
       align-items: center;
       gap: 8px;
       font-weight: 500;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .control-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+    
+    .control-btn:hover::before {
+      left: 100%;
     }
     
     .control-btn:hover {
@@ -150,6 +370,116 @@
       box-shadow: 0 0 15px rgba(255, 171, 0, 0.5);
     }
 
+    .date-search {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 25px;
+      animation: slideUp 0.8s ease 0.4s both;
+    }
+
+    .date-search-container {
+      display: flex;
+      gap: 10px;
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+      padding: 12px 18px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: var(--transition);
+      align-items: center;
+    }
+
+    .date-search-container:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .date-search-label {
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .date-input {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.15);
+      color: var(--text-light);
+      font-size: 1rem;
+      transition: var(--transition);
+      backdrop-filter: blur(5px);
+    }
+
+    .date-input:focus {
+      outline: none;
+      background: rgba(255,255,255,0.25);
+      box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.5);
+    }
+
+    .date-search-btn {
+      padding: 8px 15px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--primary-green), var(--green-light));
+      color: var(--text-light);
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 500;
+    }
+
+    .date-search-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+    }
+
+    .week-indicator {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding: 10px 20px;
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+      border: 1px solid rgba(255,255,255,0.2);
+      animation: slideUp 0.8s ease 0.6s both;
+    }
+    
+    .week-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--green-light);
+      animation: pulse 2s infinite;
+    }
+    
+    .week-dot.even {
+      background: var(--accent-green);
+    }
+    
+    @keyframes pulse {
+      0% { 
+        opacity: 0.5; 
+        transform: scale(0.8);
+      }
+      50% { 
+        opacity: 1; 
+        transform: scale(1.2);
+        box-shadow: 0 0 10px currentColor;
+      }
+      100% { 
+        opacity: 0.5; 
+        transform: scale(0.8);
+      }
+    }
 
     .day-nav {
       display: flex;
@@ -157,6 +487,7 @@
       gap: 10px;
       margin-bottom: 30px;
       flex-wrap: wrap;
+      animation: slideUp 0.8s ease 0.8s both;
     }
     
     .day-btn {
@@ -166,10 +497,24 @@
       background: var(--glass);
       color: var(--text-light);
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: var(--transition);
       backdrop-filter: blur(10px);
       font-weight: 500;
       border: 1px solid rgba(255,255,255,0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .day-btn::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--green-light);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
     }
     
     .day-btn:hover {
@@ -181,7 +526,10 @@
       background: linear-gradient(135deg, var(--primary-green), var(--green-light));
       box-shadow: 0 0 15px rgba(76, 175, 80, 0.5);
     }
-
+    
+    .day-btn.active::after {
+      transform: scaleX(1);
+    }
 
     .section {
       width:100%;
@@ -192,8 +540,27 @@
       border-radius:20px;
       padding:24px;
       box-shadow:0 0 25px rgba(46, 125, 50, 0.3);
-      transition: transform .4s ease, box-shadow .4s ease;
+      transition: var(--transition);
       border: 1px solid rgba(255,255,255,0.2);
+      animation: slideUp 0.8s ease 1s both;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    
+    .section:hover::before {
+      opacity: 1;
     }
     
     .section:hover {
@@ -207,6 +574,20 @@
       font-size:22px;
       text-shadow:0 0 10px rgba(0,0,0,0.3);
       color: var(--bg-white);
+      position: relative;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 25%;
+      width: 50%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent-green), transparent);
+      border-radius: 2px;
     }
 
     ul {list-style:none;padding:0;}
@@ -217,8 +598,25 @@
       border-radius:14px;
       background:rgba(255,255,255,0.1);
       box-shadow: inset 0 0 10px rgba(46, 125, 50, 0.2);
-      transition: all 0.3s ease;
+      transition: var(--transition);
       border-left: 4px solid var(--green-light);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lesson-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      transition: left 0.5s;
+    }
+    
+    .lesson-item:hover::before {
+      left: 100%;
     }
     
     .lesson-item:hover {
@@ -236,6 +634,13 @@
       background: rgba(76, 175, 80, 0.2);
       border-left-color: var(--success);
       box-shadow: 0 0 20px rgba(0, 200, 83, 0.3);
+      animation: pulseCurrent 2s infinite;
+    }
+
+    @keyframes pulseCurrent {
+      0% { box-shadow: 0 0 20px rgba(0, 200, 83, 0.3); }
+      50% { box-shadow: 0 0 30px rgba(0, 200, 83, 0.6); }
+      100% { box-shadow: 0 0 20px rgba(0, 200, 83, 0.3); }
     }
     
     .lesson-item.future {
@@ -253,6 +658,9 @@
       opacity: 0.8;
       margin-bottom: 5px;
       color: var(--text-light);
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
     
     .lesson-status {
@@ -265,6 +673,7 @@
       background: rgba(255,255,255,0.1);
       font-size: 0.85rem;
       color: var(--text-light);
+      transition: var(--transition);
     }
     
     .status-current {
@@ -281,42 +690,40 @@
       font-weight: bold;
       color: var(--accent-green);
     }
-    
 
-    .week-indicator {
+    .progress-container {
+      width: 100%;
+      height: 6px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 3px;
+      margin: 15px 0;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--green-light), var(--accent-green));
+      border-radius: 3px;
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+
+    .day-progress {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 20px;
-      padding: 10px 20px;
-      background: var(--glass);
-      backdrop-filter: blur(10px);
-      border-radius: 12px;
-      max-width: 300px;
-      margin-left: auto;
-      margin-right: auto;
-      border: 1px solid rgba(255,255,255,0.2);
+      justify-content: space-between;
+      font-size: 0.8rem;
+      margin-top: 5px;
+      color: rgba(255,255,255,0.7);
     }
-    
-    .week-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: var(--green-light);
-      animation: pulse 2s infinite;
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 30px;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.8rem;
+      animation: fadeIn 1s ease 1.2s both;
     }
-    
-    .week-dot.even {
-      background: var(--accent-green);
-    }
-    
-    @keyframes pulse {
-      0% { opacity: 0.5; }
-      50% { opacity: 1; }
-      100% { opacity: 0.5; }
-    }
-    
 
     @media (max-width: 768px) {
       .header h1 {
@@ -331,6 +738,12 @@
       .control-group {
         width: 100%;
         justify-content: center;
+      }
+
+      .date-search-container {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
       }
       
       .day-nav {
@@ -347,12 +760,47 @@
         align-items: flex-start;
         gap: 5px;
       }
+      
+      .important-info {
+        padding: 15px;
+      }
+      
+      .important-info-title {
+        font-size: 1.1rem;
+      }
     }
   </style>
 </head>
 <body>
   <div class="bg-pattern"></div>
   <div class="bg-logo"></div>
+  
+  <div class="floating-elements">
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+  </div>
+  
+
+  <div class="important-info">
+    <div class="important-info-header">
+      <i class="fas fa-exclamation-circle important-info-icon"></i>
+      <h2 class="important-info-title">Информация</h2>
+    </div>
+    <div class="important-info-content">
+      <div class="important-info-item">
+        По наступлению следующей недели расписание обновляется в понедельник 8:30
+      </div>
+<!--
+      <div class="important-info-item">
+        Изменения расписания на .../.../...
+        <div class="important-info-date">1... 2... 3... 4...
+        -->
+        </div>
+      </div>
+    </div>
+  </div>
   
   <div class="header">
     <div class="logo-container">
@@ -377,6 +825,18 @@
       </button>
     </div>
   </div>
+
+  <div class="date-search">
+    <div class="date-search-container">
+      <span class="date-search-label">
+        <i class="fas fa-search"></i> Поиск по дате:
+      </span>
+      <input type="date" class="date-input" id="dateSearchInput">
+      <button class="date-search-btn" id="dateSearchBtn">
+        <i class="fas fa-arrow-right"></i> Найти
+      </button>
+    </div>
+  </div>
   
   <div class="week-indicator" id="weekIndicator">
     <div class="week-dot" id="weekDot"></div>
@@ -387,322 +847,427 @@
 
   </div>
 
-
   <div class="section" id="scheduleContent">
     <h2 id="weekTypeTitle">Загрузка...</h2>
+    
+    <div class="progress-container">
+      <div class="progress-bar" id="dayProgress"></div>
+    </div>
+    <div class="day-progress">
+      <span>Начало дня</span>
+      <span id="progressText">0%</span>
+      <span>Конец дня</span>
+    </div>
+    
     <ul id="todaySchedule"></ul>
   </div>
 
   <script>
-
-  const schedule = {
-    1: { // понедельник
-      even: [
-        {subject: "Кл. час", room: "П-205", time: "8:30-9:50"},
-        {subject: "Биология", room: "П-205", time: "10:00-11:20"},
-        {subject: "История", room: "П-205", time: "11:50-13:10"},
-        {subject: "ОБЖР", room: "П-205", time: "13:20-14:40"}
-      ],
-      odd: [
-        {subject: "Кл. час", room: "П-205", time: "8:30-9:50"},
-        {subject: "Физика", room: "П-205", time: "10:00-11:20"},
-        {subject: "Математика", room: "П-205", time: "11:50-13:10"},
-        {subject: "Иностранный язык", room: "П-205", time: "13:20-14:40"}
-      ]
-    },
-    2: { // вторник
-      even: [
-        {subject: "Математика", room: "П-205", time: "8:30-9:50"},
-        {subject: "Физика", room: "П-205", time: "10:00-11:20"},
-        {subject: "География", room: "П-205", time: "11:50-13:10"}
-      ],
-      odd: [
-        {subject: "Индивидуальный проект", room: "П-205", time: "8:30-9:50"},
-        {subject: "История", room: "П-205", time: "10:00-11:20"},
-        {subject: "Литература", room: "П-205", time: "11:50-13:10"}
-      ]
-    },
-    3: { // среда
-      even: [
-        {subject: "Математика", room: "П-205", time: "8:30-9:50"},
-        {subject: "История", room: "П-205", time: "10:00-11:20"},
-        {subject: "ОБЖР", room: "П-205", time: "11:50-13:10"}
-      ],
-      odd: [
-        {subject: "Информатика", room: "П-205", time: "8:30-9:50"},
-        {subject: "Физика", room: "П-205", time: "10:00-11:20"}
-      ]
-    },
-    4: { // четверг
-      even: [
-        {subject: "Иностранный язык", room: "П-205", time: "8:30-9:50"},
-        {subject: "Русский язык", room: "П-205", time: "10:00-11:20"},
-        {subject: "Информатика", room: "П-205", time: "11:50-13:10"}
-      ],
-      odd: [
-        {subject: "Русский язык", room: "П-205", time: "8:30-9:50"},
-        {subject: "Математика", room: "П-205", time: "10:00-11:20"},
-        {subject: "География", room: "П-205", time: "11:50-13:10"}
-      ]
-    },
-    5: { // пятница
-      even: [
-        {subject: "Физкультура", room: "П-205", time: "8:30-9:50"},
-        {subject: "Физика", room: "П-205", time: "10:00-11:20"},
-        {subject: "Математика", room: "П-205", time: "11:50-13:10"}
-      ],
-      odd: [
-        {subject: "ОБЖР", room: "П-205", time: "8:30-9:50"},
-        {subject: "Обществознание", room: "П-205", time: "10:00-11:20"},
-        {subject: "Физкультура", room: "П-205", time: "11:50-13:10"},
-        {subject: "Биология", room: "П-205", time: "13:20-14:40"}
-      ]
-    },
-    6: { // суббота
-      even: [
-        {subject: "Литература", room: "П-205", time: "8:30-9:50"},
-        {subject: "Математика", room: "П-205", time: "10:00-11:20"},
-        {subject: "Обществознание", room: "П-205", time: "11:50-13:10"}
-      ],
-      odd: [
-        {subject: "Химия", room: "П-205", time: "8:30-9:50"},
-        {subject: "Математика", room: "П-205", time: "10:00-11:20"},
-        {subject: "История", room: "П-205", time: "11:50-13:10"}
-      ]
-    }
-  };
-
-
-  const dayNames = {
-    1: "Понедельник",
-    2: "Вторник",
-    3: "Среда",
-    4: "Четверг",
-    5: "Пятница",
-    6: "Суббота"
-  };
-
-function isEvenWeek(d = new Date()) {
-  const semesterStart = new Date('2025-09-22');
-  
-  const diffTime = Math.abs(d - semesterStart);
-  const diffWeeks = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 7));
-  
-  return diffWeeks % 2 === 0;
-}
-
-
-  function parseTime(timeStr) {
-    const [hours, minutes] = timeStr.split(':').map(Number);
-    const now = new Date();
-    return new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes);
-  }
-
-  function getLessonTimeRange(timeStr) {
-    const [startStr, endStr] = timeStr.split('-');
-    return {
-      start: parseTime(startStr),
-      end: parseTime(endStr)
+    const schedule = {
+      1: { // понедельник
+        even: [
+          {subject: "Кл. час", room: "П-205", time: "8:30-9:50"},
+          {subject: "Биология", room: "П-205", time: "10:00-11:20"},
+          {subject: "История", room: "П-205", time: "11:50-13:10"},
+          {subject: "ОБЖР", room: "П-205", time: "13:20-14:40"}
+        ],
+        odd: [
+          {subject: "Кл. час", room: "П-205", time: "8:30-9:50"},
+          {subject: "Физика", room: "П-205", time: "10:00-11:20"},
+          {subject: "Математика", room: "П-205", time: "11:50-13:10"},
+          {subject: "Иностранный язык", room: "П-205", time: "13:20-14:40"}
+        ]
+      },
+      2: { // вторник
+        even: [
+          {subject: "Математика", room: "П-205", time: "8:30-9:50"},
+          {subject: "Физика", room: "П-205", time: "10:00-11:20"},
+          {subject: "География", room: "П-205", time: "11:50-13:10"}
+        ],
+        odd: [
+          {subject: "Индивидуальный проект", room: "П-205", time: "8:30-9:50"},
+          {subject: "История", room: "П-205", time: "10:00-11:20"},
+          {subject: "Литература", room: "П-205", time: "11:50-13:10"}
+        ]
+      },
+      3: { // среда
+        even: [
+          {subject: "Математика", room: "П-205", time: "8:30-9:50"},
+          {subject: "История", room: "П-205", time: "10:00-11:20"},
+          {subject: "ОБЖР", room: "П-205", time: "11:50-13:10"}
+        ],
+        odd: [
+          {subject: "Информатика", room: "П-205", time: "8:30-9:50"},
+          {subject: "Физика", room: "П-205", time: "10:00-11:20"}
+        ]
+      },
+      4: { // четверг
+        even: [
+          {subject: "Иностранный язык", room: "П-205", time: "8:30-9:50"},
+          {subject: "Русский язык", room: "П-205", time: "10:00-11:20"},
+          {subject: "Информатика", room: "П-205", time: "11:50-13:10"}
+        ],
+        odd: [
+          {subject: "Русский язык", room: "П-205", time: "8:30-9:50"},
+          {subject: "Математика", room: "П-205", time: "10:00-11:20"},
+          {subject: "География", room: "П-205", time: "11:50-13:10"}
+        ]
+      },
+      5: { // пятница
+        even: [
+          {subject: "Физкультура", room: "П-205", time: "8:30-9:50"},
+          {subject: "Физика", room: "П-205", time: "10:00-11:20"},
+          {subject: "Математика", room: "П-205", time: "11:50-13:10"}
+        ],
+        odd: [
+          {subject: "ОБЖР", room: "П-205", time: "8:30-9:50"},
+          {subject: "Обществознание", room: "П-205", time: "10:00-11:20"},
+          {subject: "Физкультура", room: "П-205", time: "11:50-13:10"},
+          {subject: "Биология", room: "П-205", time: "13:20-14:40"}
+        ]
+      },
+      6: { // суббота
+        even: [
+          {subject: "Литература", room: "П-205", time: "8:30-9:50"},
+          {subject: "Математика", room: "П-205", time: "10:00-11:20"},
+          {subject: "Обществознание", room: "П-205", time: "11:50-13:10"}
+        ],
+        odd: [
+          {subject: "Химия", room: "П-205", time: "8:30-9:50"},
+          {subject: "Математика", room: "П-205", time: "10:00-11:20"},
+          {subject: "История", room: "П-205", time: "11:50-13:10"}
+        ]
+      }
     };
-  }
 
-  function getTimeRemaining(targetTime) {
-    const now = new Date();
-    const diff = targetTime - now;
-    
-    if (diff <= 0) return null;
-    
-    const hours = Math.floor(diff / (1000 * 60 * 60));
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    
-    if (hours > 0) {
-      return `${hours}ч ${minutes}м`;
-    } else {
-      return `${minutes}м`;
+    const dayNames = {
+      1: "Понедельник",
+      2: "Вторник",
+      3: "Среда",
+      4: "Четверг",
+      5: "Пятница",
+      6: "Суббота"
+    };
+
+    function isEvenWeek(d = new Date()) {
+      const semesterStart = new Date('2025-09-22');
+      
+      const diffTime = Math.abs(d - semesterStart);
+      const diffWeeks = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 7));
+      
+      return diffWeeks % 2 === 0;
     }
-  }
 
-  function getLessonStatus(lesson, index, allLessons) {
-    const now = new Date();
-    const timeRange = getLessonTimeRange(lesson.time);
-    
-    if (now > timeRange.end) {
-      return 'past';
-    } else if (now >= timeRange.start && now <= timeRange.end) {
-      return 'current';
-    } else {
+    function parseTime(timeStr) {
+      const [hours, minutes] = timeStr.split(':').map(Number);
+      const now = new Date();
+      return new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes);
+    }
 
-      const previousLesson = index > 0 ? allLessons[index - 1] : null;
-      if (previousLesson) {
-        const prevTimeRange = getLessonTimeRange(previousLesson.time);
-        if (now > prevTimeRange.end && now < timeRange.start) {
+    function getLessonTimeRange(timeStr) {
+      const [startStr, endStr] = timeStr.split('-');
+      return {
+        start: parseTime(startStr),
+        end: parseTime(endStr)
+      };
+    }
+
+    function getTimeRemaining(targetTime) {
+      const now = new Date();
+      const diff = targetTime - now;
+      
+      if (diff <= 0) return null;
+      
+      const hours = Math.floor(diff / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      
+      if (hours > 0) {
+        return `${hours}ч ${minutes}м`;
+      } else {
+        return `${minutes}м`;
+      }
+    }
+
+    function getLessonStatus(lesson, index, allLessons) {
+      const now = new Date();
+      const timeRange = getLessonTimeRange(lesson.time);
+      
+      if (now > timeRange.end) {
+        return 'past';
+      } else if (now >= timeRange.start && now <= timeRange.end) {
+        return 'current';
+      } else {
+        const previousLesson = index > 0 ? allLessons[index - 1] : null;
+        if (previousLesson) {
+          const prevTimeRange = getLessonTimeRange(previousLesson.time);
+          if (now > prevTimeRange.end && now < timeRange.start) {
+            return 'next';
+          }
+        } else if (now < timeRange.start) {
           return 'next';
         }
-      } else if (now < timeRange.start) {
-        return 'next';
+        return 'future';
       }
-      return 'future';
     }
-  }
 
-  function getStatusInfo(lesson, status, index, allLessons) {
-    const now = new Date();
-    const timeRange = getLessonTimeRange(lesson.time);
-    
-    switch(status) {
-      case 'past':
-        return null;
+    function getStatusInfo(lesson, status, index, allLessons) {
+      const now = new Date();
+      const timeRange = getLessonTimeRange(lesson.time);
       
-      case 'current':
-        const timeLeft = getTimeRemaining(timeRange.end);
-        return {
-          text: `⏳ Идет сейчас • До конца: ${timeLeft}`,
-          class: 'status-current'
-        };
-      
-      case 'next':
-        const timeToStart = getTimeRemaining(timeRange.start);
-        return {
-          text: `🕐 Следующая пара • До начала: ${timeToStart}`,
-          class: 'status-next'
-        };
-      
-      case 'future':
-
-        if (index === 0 && now < timeRange.start) {
+      switch(status) {
+        case 'past':
+          return null;
+        
+        case 'current':
+          const timeLeft = getTimeRemaining(timeRange.end);
+          return {
+            text: `⏳ Идет сейчас • До конца: ${timeLeft}`,
+            class: 'status-current'
+          };
+        
+        case 'next':
           const timeToStart = getTimeRemaining(timeRange.start);
           return {
-            text: `🕐 До начала: ${timeToStart}`,
+            text: `🕐 Следующая пара • До начала: ${timeToStart}`,
             class: 'status-next'
           };
-        }
-        return null;
-      
-      default:
-        return null;
-    }
-  }
-
-
-  function formatDate(date) {
-    const options = { 
-      weekday: 'long', 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
-    };
-    return date.toLocaleDateString('ru-RU', options);
-  }
-
-
-  function renderSchedule(day, weekType, isToday = false) {
-    const title = document.getElementById("weekTypeTitle");
-    const list = document.getElementById("todaySchedule");
-    
-
-    document.querySelectorAll('.day-btn').forEach(btn => {
-      btn.classList.remove('active');
-    });
-    document.getElementById(`day-${day}`).classList.add('active');
-    
-
-    document.querySelectorAll('#evenWeekBtn, #oddWeekBtn').forEach(btn => {
-      btn.classList.remove('active');
-    });
-    
-    if (weekType === "even") {
-      document.getElementById('evenWeekBtn').classList.add('active');
-    } else {
-      document.getElementById('oddWeekBtn').classList.add('active');
-    }
-    
-
-    const weekDot = document.getElementById('weekDot');
-    const weekIndicatorText = document.getElementById('weekIndicatorText');
-    
-    weekDot.className = `week-dot ${weekType}`;
-    weekIndicatorText.textContent = weekType === "even" ? "Чётная неделя / нижнее" : "Нечётная неделя / верхнее";
-    
-    if(day === 0){
-      title.textContent = "Воскресенье 🎉";
-      list.innerHTML = "<li class='lesson-item'>Выходной день! Отдыхайте!</li>";
-    } else {
-      const todayIndicator = isToday ? " • Сегодня" : "";
-      title.textContent = `${dayNames[day]}${todayIndicator} • ${weekType === "even" ? "Чётная неделя" : "Нечётная неделя"}`;
-      const lessons = schedule[day][weekType] || [];
-      
-      if (lessons.length === 0) {
-        list.innerHTML = "<li class='lesson-item'>На этот день нет расписания</li>";
-      } else {
-        list.innerHTML = lessons.map((lesson, i) => {
-          const status = isToday ? getLessonStatus(lesson, i, lessons) : 'future';
-          const statusInfo = isToday ? getStatusInfo(lesson, status, i, lessons) : null;
-          
-          return `<li class="lesson-item ${status}">
-            <strong>${i+1}. ${lesson.subject} (${lesson.room})</strong>
-            <div class="lesson-time">🕐 ${lesson.time}</div>
-            ${statusInfo ? `
-              <div class="lesson-status ${statusInfo.class}">
-                ${statusInfo.text}
-              </div>
-            ` : ''}
-          </li>`;
-        }).join("");
+        
+        case 'future':
+          if (index === 0 && now < timeRange.start) {
+            const timeToStart = getTimeRemaining(timeRange.start);
+            return {
+              text: `🕐 До начала: ${timeToStart}`,
+              class: 'status-next'
+            };
+          }
+          return null;
+        
+        default:
+          return null;
       }
     }
-  }
 
-  document.addEventListener('DOMContentLoaded', function() {
-    const today = new Date();
-    const day = today.getDay();
-    const weekType = isEvenWeek(today) ? "even" : "odd";
-    
-
-    document.getElementById('currentDate').textContent = formatDate(today);
-    
-
-    const dayNav = document.getElementById('dayNav');
-    for (let i = 1; i <= 6; i++) {
-      const button = document.createElement('button');
-      button.className = `day-btn ${i === day ? 'active' : ''}`;
-      button.id = `day-${i}`;
-      button.textContent = dayNames[i];
-      button.addEventListener('click', () => {
-
-        const currentWeekType = document.getElementById('evenWeekBtn').classList.contains('active') ? 'even' : 'odd';
-        const isToday = parseInt(button.id.split('-')[1]) === day;
-        renderSchedule(i, currentWeekType, isToday);
-      });
-      dayNav.appendChild(button);
+    function formatDate(date) {
+      const options = { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      };
+      return date.toLocaleDateString('ru-RU', options);
     }
-    
 
-    document.getElementById('evenWeekBtn').addEventListener('click', () => {
-      const activeDay = document.querySelector('.day-btn.active').id.split('-')[1];
-      const isToday = parseInt(activeDay) === day;
-      renderSchedule(parseInt(activeDay), 'even', isToday);
-    });
-    
-    document.getElementById('oddWeekBtn').addEventListener('click', () => {
-      const activeDay = document.querySelector('.day-btn.active').id.split('-')[1];
-      const isToday = parseInt(activeDay) === day;
-      renderSchedule(parseInt(activeDay), 'odd', isToday);
-    });
-    
+    function calculateDayProgress(lessons) {
+      if (!lessons || lessons.length === 0) return 0;
+      
+      const now = new Date();
+      const firstLesson = getLessonTimeRange(lessons[0].time);
+      const lastLesson = getLessonTimeRange(lessons[lessons.length - 1].time);
+      
+      const dayStart = firstLesson.start;
+      const dayEnd = lastLesson.end;
+      
+      if (now < dayStart) return 0;
+      if (now > dayEnd) return 100;
+      
+      const totalDuration = dayEnd - dayStart;
+      const elapsed = now - dayStart;
+      
+      return Math.min(100, Math.max(0, (elapsed / totalDuration) * 100));
+    }
 
-    document.getElementById('todayBtn').addEventListener('click', () => {
+    function renderSchedule(day, weekType, isToday = false) {
+      const title = document.getElementById("weekTypeTitle");
+      const list = document.getElementById("todaySchedule");
+      const progressBar = document.getElementById("dayProgress");
+      const progressText = document.getElementById("progressText");
+      
+
+      document.querySelectorAll('.day-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      document.getElementById(`day-${day}`).classList.add('active');
+      
+
+      document.querySelectorAll('#evenWeekBtn, #oddWeekBtn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      if (weekType === "even") {
+        document.getElementById('evenWeekBtn').classList.add('active');
+      } else {
+        document.getElementById('oddWeekBtn').classList.add('active');
+      }
+
+
+      const weekDot = document.getElementById('weekDot');
+      const weekIndicatorText = document.getElementById('weekIndicatorText');
+      
+      weekDot.className = `week-dot ${weekType}`;
+      weekIndicatorText.textContent = weekType === "even" ? "Чётная неделя / нижнее" : "Нечётная неделя / верхнее";
+      
+      if(day === 0){
+        title.textContent = "Воскресенье 🎉";
+        list.innerHTML = "<li class='lesson-item'>Выходной день! Отдыхайте!</li>";
+        progressBar.style.width = "0%";
+        progressText.textContent = "0%";
+      } else {
+        const todayIndicator = isToday ? " • Сегодня" : "";
+        title.textContent = `${dayNames[day]}${todayIndicator} • ${weekType === "even" ? "Чётная неделя" : "Нечётная неделя"}`;
+        const lessons = schedule[day][weekType] || [];
+        
+        if (lessons.length === 0) {
+          list.innerHTML = "<li class='lesson-item'>На этот день нет расписания</li>";
+          progressBar.style.width = "0%";
+          progressText.textContent = "0%";
+        } else {
+
+          const progress = isToday ? calculateDayProgress(lessons) : 0;
+          progressBar.style.width = `${progress}%`;
+          progressText.textContent = `${Math.round(progress)}%`;
+          
+          list.innerHTML = lessons.map((lesson, i) => {
+            const status = isToday ? getLessonStatus(lesson, i, lessons) : 'future';
+            const statusInfo = isToday ? getStatusInfo(lesson, status, i, lessons) : null;
+            
+            return `<li class="lesson-item ${status}">
+              <strong>${i+1}. ${lesson.subject} (${lesson.room})</strong>
+              <div class="lesson-time">🕐 ${lesson.time}</div>
+              ${statusInfo ? `
+                <div class="lesson-status ${statusInfo.class}">
+                  ${statusInfo.text}
+                </div>
+              ` : ''}
+            </li>`;
+          }).join("");
+        }
+      }
+    }
+
+    function searchByDate(dateString) {
+      const searchDate = new Date(dateString);
+      const day = searchDate.getDay();
+      const weekType = isEvenWeek(searchDate) ? "even" : "odd";
+      
+
+      document.getElementById('currentDate').textContent = formatDate(searchDate);
+      
+
+      renderSchedule(day, weekType, false);
+      
+
+      const title = document.getElementById("weekTypeTitle");
+      title.textContent += ` • ${searchDate.toLocaleDateString('ru-RU')}`;
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const today = new Date();
+      const day = today.getDay();
+      const weekType = isEvenWeek(today) ? "even" : "odd";
+      
+
+      const dateInput = document.getElementById('dateSearchInput');
+      const todayFormatted = today.toISOString().split('T')[0];
+      dateInput.value = todayFormatted;
+      
+
+      document.getElementById('currentDate').textContent = formatDate(today);
+      
+
+      const dayNav = document.getElementById('dayNav');
+      for (let i = 1; i <= 6; i++) {
+        const button = document.createElement('button');
+        button.className = `day-btn ${i === day ? 'active' : ''}`;
+        button.id = `day-${i}`;
+        button.textContent = dayNames[i];
+        button.addEventListener('click', () => {
+
+          button.style.transform = 'scale(0.95)';
+          setTimeout(() => {
+            button.style.transform = '';
+          }, 150);
+          
+          const currentWeekType = document.getElementById('evenWeekBtn').classList.contains('active') ? 'even' : 'odd';
+          const isToday = parseInt(button.id.split('-')[1]) === day;
+          renderSchedule(i, currentWeekType, isToday);
+        });
+        dayNav.appendChild(button);
+      }
+      
+
+      document.getElementById('evenWeekBtn').addEventListener('click', function() {
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          this.style.transform = '';
+        }, 150);
+        
+        const activeDay = document.querySelector('.day-btn.active').id.split('-')[1];
+        const isToday = parseInt(activeDay) === day;
+        renderSchedule(parseInt(activeDay), 'even', isToday);
+      });
+      
+      document.getElementById('oddWeekBtn').addEventListener('click', function() {
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          this.style.transform = '';
+        }, 150);
+        
+        const activeDay = document.querySelector('.day-btn.active').id.split('-')[1];
+        const isToday = parseInt(activeDay) === day;
+        renderSchedule(parseInt(activeDay), 'odd', isToday);
+      });
+      
+
+      document.getElementById('todayBtn').addEventListener('click', function() {
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          this.style.transform = '';
+        }, 150);
+        
+        renderSchedule(day, weekType, true);
+      });
+      
+
+      document.getElementById('dateSearchBtn').addEventListener('click', function() {
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          this.style.transform = '';
+        }, 150);
+        
+        const dateValue = dateInput.value;
+        if (dateValue) {
+          searchByDate(dateValue);
+        }
+      });
+      
+
+      dateInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          const dateValue = dateInput.value;
+          if (dateValue) {
+            searchByDate(dateValue);
+          }
+        }
+      });
+      
+
       renderSchedule(day, weekType, true);
+      
+
+      setInterval(() => {
+        const activeDay = document.querySelector('.day-btn.active').id.split('-')[1];
+        const currentWeekType = document.getElementById('evenWeekBtn').classList.contains('active') ? 'even' : 'odd';
+        const isToday = parseInt(activeDay) === day;
+        
+        if (isToday) {
+          renderSchedule(parseInt(activeDay), currentWeekType, true);
+        }
+      }, 60000);
     });
-    
-
-    renderSchedule(day, weekType, true);
-    
-
-    startTimeUpdates();
-  });
   </script>
-  <footer style="text-align: center; padding: 20px; margin-top: 30px; color: rgba(255,255,255,0.7); font-size: 0.8rem;">
+  
+  <footer>
     by SKETH
-</footer>
+  </footer>
 </body>
-  </html>
+</html>
