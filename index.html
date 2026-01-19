@@ -970,7 +970,7 @@
       <p class="site-transition-message">
         В скором времени расписание перейдет на сайт <strong>ksktop.ru</strong> 
         <span class="site-transition-beta">BETA</span><br>
-        (в данный момент сайт находится в beta версии и активно разрабатывается, расписание нашей группы на новом сайте уже полностью работает).<br>
+        (в данный момент сайт находится в beta версии и активно разрабатывается).<br>
         Текущий сайт после выхода новой версии перестанет поддерживаться.
       </p>
       <a href="https://ksktop.ru" target="_blank" class="site-transition-button">
@@ -1485,5 +1485,179 @@
   <footer>
     by SKETH | © 2026 SKETH. All rights reserved.
   </footer>
+  <style>
+    .chain-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: linear-gradient(45deg, #6a11cb 0%, #2575fc 100%);
+        color: white;
+        border: none;
+        padding: 15px 25px;
+        border-radius: 50px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        z-index: 10000;
+        transition: all 0.3s ease;
+        overflow: hidden;
+    }
+    
+    .chain-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+    
+    .chain-button:active {
+        transform: translateY(1px);
+    }
+    
+    .page-transition {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        z-index: 999999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.5s ease;
+    }
+    
+    .page-transition.active {
+        opacity: 1;
+        pointer-events: all;
+    }
+    
+    .chain-loader {
+        width: 80px;
+        height: 80px;
+        position: relative;
+    }
+    
+    .chain-link {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: white;
+        border-radius: 50%;
+        animation: chainAnimation 1.5s ease-in-out infinite;
+    }
+    
+    .chain-link:nth-child(1) {
+        top: 0;
+        left: 30px;
+        animation-delay: 0s;
+    }
+    
+    .chain-link:nth-child(2) {
+        top: 15px;
+        left: 50px;
+        animation-delay: 0.1s;
+    }
+    
+    .chain-link:nth-child(3) {
+        top: 40px;
+        left: 55px;
+        animation-delay: 0.2s;
+    }
+    
+    .chain-link:nth-child(4) {
+        top: 60px;
+        left: 40px;
+        animation-delay: 0.3s;
+    }
+    
+    .chain-link:nth-child(5) {
+        top: 60px;
+        left: 10px;
+        animation-delay: 0.4s;
+    }
+    
+    .chain-link:nth-child(6) {
+        top: 40px;
+        left: 0;
+        animation-delay: 0.5s;
+    }
+    
+    .chain-link:nth-child(7) {
+        top: 15px;
+        left: 5px;
+        animation-delay: 0.6s;
+    }
+    
+    @keyframes chainAnimation {
+        0%, 100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+        50% {
+            transform: scale(1.5);
+            opacity: 0.7;
+        }
+    }
+    
+    .chain-text {
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 20px;
+        text-align: center;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+</style>
+
+<button class="chain-button" id="chainButton">
+    ⛓️ Перейти на chain версию сайта
+</button>
+
+<div class="page-transition" id="pageTransition">
+    <div>
+        <div class="chain-loader">
+            <div class="chain-link"></div>
+            <div class="chain-link"></div>
+            <div class="chain-link"></div>
+            <div class="chain-link"></div>
+            <div class="chain-link"></div>
+            <div class="chain-link"></div>
+            <div class="chain-link"></div>
+        </div>
+        <div class="chain-text">Подключаемся к chain сети...</div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('chainButton').addEventListener('click', function() {
+        const transition = document.getElementById('pageTransition');
+        
+        // Показываем анимацию перехода
+        transition.classList.add('active');
+        
+        // Ждем окончания анимации и переходим по ссылке
+        setTimeout(function() {
+            window.location.href = 'https://vova0x0.github.io/GlassRaspisanie/';
+        }, 2000); // Длительность анимации 2 секунды
+        
+        // Отключаем возможность повторного нажатия
+        this.style.pointerEvents = 'none';
+        this.style.opacity = '0.7';
+    });
+    
+    // Дополнительный эффект при загрузке страницы
+    window.addEventListener('load', function() {
+        const button = document.getElementById('chainButton');
+        setTimeout(() => {
+            button.style.transform = 'scale(1.05)';
+            setTimeout(() => {
+                button.style.transform = 'scale(1)';
+            }, 300);
+        }, 1000);
+    });
+</script>
 </body>
 </html>
