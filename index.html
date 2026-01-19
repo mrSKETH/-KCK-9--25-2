@@ -45,6 +45,156 @@
       to { opacity: 1; }
     }
 
+    /* Стили для всплывающего уведомления о новом сайте */
+    .site-transition-notice {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 800px;
+      background: linear-gradient(135deg, rgba(255, 152, 0, 0.9), rgba(255, 87, 34, 0.9));
+      backdrop-filter: blur(15px) saturate(180%);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(255, 152, 0, 0.4);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      z-index: 1000;
+      animation: slideDownNotice 0.8s ease-out, pulseNotice 3s infinite;
+      margin-bottom: 20px;
+    }
+
+    @keyframes slideDownNotice {
+      from {
+        transform: translate(-50%, -100px);
+        opacity: 0;
+      }
+      to {
+        transform: translate(-50%, 0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes pulseNotice {
+      0% {
+        box-shadow: 0 10px 30px rgba(255, 152, 0, 0.4);
+      }
+      50% {
+        box-shadow: 0 10px 40px rgba(255, 152, 0, 0.7);
+      }
+      100% {
+        box-shadow: 0 10px 30px rgba(255, 152, 0, 0.4);
+      }
+    }
+
+    .site-transition-content {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .site-transition-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .site-transition-icon {
+      font-size: 1.8rem;
+      color: #fff;
+      animation: shake 2s infinite;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-5deg); }
+      75% { transform: rotate(5deg); }
+    }
+
+    .site-transition-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    .site-transition-message {
+      font-size: 1.1rem;
+      line-height: 1.5;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .site-transition-beta {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-left: 10px;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .site-transition-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #fff, #f5f5f5);
+      color: #ff5722;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      align-self: center;
+    }
+
+    .site-transition-button:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      background: linear-gradient(135deg, #f5f5f5, #fff);
+    }
+
+    .site-transition-button i {
+      font-size: 1.2rem;
+    }
+
+    .site-transition-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: #fff;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      font-size: 1.2rem;
+    }
+
+    .site-transition-close:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: rotate(90deg);
+    }
+
     .bg-logo {
       position: fixed; 
       inset: 0;
@@ -131,7 +281,7 @@
     .important-info {
       width: 100%;
       max-width: 800px;
-      margin: 0 auto 30px;
+      margin: 100px auto 30px;
       background: linear-gradient(135deg, rgba(33, 150, 243, 0.2), rgba(33, 150, 243, 0.4));
       backdrop-filter: blur(15px) saturate(180%);
       border-radius: 20px;
@@ -730,6 +880,26 @@
     }
 
     @media (max-width: 768px) {
+      .site-transition-notice {
+        width: 95%;
+        top: 10px;
+        padding: 15px;
+      }
+      
+      .site-transition-title {
+        font-size: 1.2rem;
+      }
+      
+      .site-transition-message {
+        font-size: 1rem;
+      }
+      
+      .site-transition-button {
+        padding: 10px 18px;
+        font-size: 1rem;
+        width: 100%;
+      }
+      
       .header h1 {
         font-size: 2rem;
       }
@@ -766,6 +936,7 @@
       }
       
       .important-info {
+        margin-top: 130px;
         padding: 15px;
       }
       
@@ -786,6 +957,27 @@
     <div class="floating-element"></div>
   </div>
   
+  <!-- Всплывающее уведомление о переходе на новый сайт -->
+  <div class="site-transition-notice" id="siteTransitionNotice">
+    <button class="site-transition-close" id="closeNoticeBtn">
+      <i class="fas fa-times"></i>
+    </button>
+    <div class="site-transition-content">
+      <div class="site-transition-header">
+        <i class="fas fa-exclamation-triangle site-transition-icon"></i>
+        <h2 class="site-transition-title">Важное объявление!</h2>
+      </div>
+      <p class="site-transition-message">
+        В скором времени расписание перейдет на сайт <strong>ksktop.ru</strong> 
+        <span class="site-transition-beta">BETA</span><br>
+        (в данный момент сайт находится в beta версии и активно разрабатывается, расписание нашей группы на новой сайте уже полностью работает).<br>
+        Текущий сайт после выхода новой версии перестанет поддерживаться.
+      </p>
+      <a href="https://ksktop.ru" target="_blank" class="site-transition-button">
+        <i class="fas fa-external-link-alt"></i> Перейти на новый сайт
+      </a>
+    </div>
+  </div>
 
   <div class="important-info">
     <div class="important-info-header">
@@ -860,6 +1052,27 @@
   </div>
 
   <script>
+    // Логика для закрытия уведомления
+    document.addEventListener('DOMContentLoaded', function() {
+      const notice = document.getElementById('siteTransitionNotice');
+      const closeBtn = document.getElementById('closeNoticeBtn');
+      
+      // Проверяем, было ли уведомление закрыто ранее
+      const isNoticeClosed = localStorage.getItem('siteTransitionNoticeClosed');
+      
+      if (isNoticeClosed === 'true') {
+        notice.style.display = 'none';
+        document.querySelector('.important-info').style.marginTop = '30px';
+      }
+      
+      closeBtn.addEventListener('click', function() {
+        notice.style.display = 'none';
+        localStorage.setItem('siteTransitionNoticeClosed', 'true');
+        // Возвращаем нормальный отступ для important-info
+        document.querySelector('.important-info').style.marginTop = '30px';
+      });
+    });
+
     const schedule = {
       1: { // понедельник
         odd: [
@@ -1273,4 +1486,4 @@
     by SKETH | © 2026 SKETH. All rights reserved.
   </footer>
 </body>
-  </html>
+</html>
